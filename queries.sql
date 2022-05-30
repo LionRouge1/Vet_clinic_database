@@ -5,7 +5,7 @@ postgres-# WHERE name LIKE '%mon';
 
 SELECT name                   
 FROM animals
-WHERE date_of_birth BETWEEN '2016/01/01' AND '2019/01/01';
+WHERE date_of_birth BETWEEN '2016/12/31' AND '2019/12/31';
 
 SELECT name
 FROM animals

@@ -12,3 +12,15 @@ CREATE TABLE animals (
 
 ALTER TABLE animals 
 ADD species VARCHAR(100);
+
+ALTER TABLE animals 
+DROP COLUMN species;
+
+ALTER TABLE animals 
+ADD species_id INT;
+
+ALTER TABLE animals 
+ADD species_id INT;
+
+
+

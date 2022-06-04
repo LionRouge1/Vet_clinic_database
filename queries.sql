@@ -186,21 +186,10 @@ vet_clinic=# SELECT COUNT(MS.Vet_name) AS visits FROM
   WHERE Sp.name IS NULL) as MS;
 
 -- What specialty should Maisy Smith consider getting? Look for the species she gets the most.
-SELECT S.name AS Species_name, MS2.species_id, MS2.Total_number AS Total_number_of_species FROM species S
-JOIN (SELECT MS.species_id, MS.Total_number FROM 
-(SELECT A.species_id, COUNT(A.species_id) AS Total_number FROM vets Vt
-  LEFT JOIN specializations Sz ON Vt.id = Sz.vets_id
-  LEFT JOIN species Sp ON Sz.species_id = Sp.id
-  JOIN visits Vs ON Vt.id = Vs.vets_id
-  JOIN animals A ON Vs.animal_id = A.id
-  WHERE Vt.name = 'Maisy Smith'
-  GROUP BY A.species_id) as MS
-WHERE MS.Total_number = (SELECT MAX(MS.Total_number) FROM
-(SELECT A.species_id, COUNT(A.species_id) AS Total_number FROM vets Vt
-  LEFT JOIN specializations Sz ON Vt.id = Sz.vets_id
-  LEFT JOIN species Sp ON Sz.species_id = Sp.id
-  JOIN visits Vs ON Vt.id = Vs.vets_id
-  JOIN animals A ON Vs.animal_id = A.id
-  WHERE Vt.name = 'Maisy Smith'
-  GROUP BY A.species_id) as MS)) AS MS2
-  ON S.id = MS2.species_id; 
+SELECT species.name, count(*)
+    FROM visits
+    LEFT JOIN animals ON animals.id = visits.animal_id
+    LEFT JOIN species ON animals.species_id = species.id
+    LEFT JOIN vets ON vets.id = visits.vets_id
+    WHERE vets.name = 'Maisy Smith'
+    GROUP BY species.name;

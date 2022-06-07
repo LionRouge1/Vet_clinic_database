@@ -67,3 +67,45 @@ SET owner_id = 5
 WHERE name = 'Angemon' 
 OR name = 'Boarmon';
 
+INSERT INTO visits 
+VALUES
+(11, 1, '2020-05-24'), 
+(11, 3, '2020-07-22'), 
+(12, 4, '2021-02-02'), 
+(15, 2, '2020-01-05'), 
+(15, 2, '2020-03-08'), 
+(15, 2, '2020-05-14'), 
+(13, 3, '2021-05-04'), 
+(19, 4, '2021-02-24'), 
+(17, 2, '2019-12-21'), 
+(17, 1,'2020-08-10'), 
+(17, 2, '2021-04-07'), 
+(20, 3, '2019-09-29'), 
+(18, 4, '2020-10-03'), 
+(18, 4, '2020-11-04'), 
+(14, 2, '2019-01-24'), 
+(14, 2, '2019-05-15'), 
+(14, 2, '2020-02-27'), 
+(14, 2, '2020-08-03'), 
+(16, 3, '2020-05-24'), 
+(16, 1, '2020-01-11');
+
+INSERT INTO vets (name, age, date_of_graduation)
+VALUES ('William Tatcher', 45, '2000-04-23'),
+        ('Maisy Smith', 26, '2019-01-17'),
+        ('Stephanie Mendez', 64, '1981-05-04'),
+        ('Jack Harkness', 38, '2008-06-08');
+
+INSERT INTO specializations (species_id, vets_id)
+VALUES ((SELECT S.id FROM species S WHERE S.name = 'Pokemon'),
+        (SELECT V.id FROM vets V WHERE V.name = 'William Tatcher')
+        ),
+        ((SELECT S.id FROM species S WHERE S.name = 'Pokemon'),
+        (SELECT V.id FROM vets V WHERE V.name = 'Stephanie Mendez')
+        ),
+        ((SELECT S.id FROM species S WHERE S.name = 'Digimon'),
+        (SELECT V.id FROM vets V WHERE V.name = 'Stephanie Mendez')
+        ),
+        ((SELECT S.id FROM species S WHERE S.name = 'Digimon'),
+        (SELECT V.id FROM vets V WHERE V.name = 'Jack Harkness')
+        );

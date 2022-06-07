@@ -36,3 +36,25 @@ CREATE TABLE species (
     name VARCHAR(100),
     PRIMARY KEY (id)
 );
+
+/* ADD JOIN TABLE FOR VISITS */
+
+CREATE TABLE vets (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(100),
+    age NUMERIC,
+    date_of_graduation DATE
+);
+
+CREATE TABLE visits (
+    animal_id INT REFERENCES animals(id),
+    vets_id INT REFERENCES vets(id),
+    date_of_visit DATE,
+    CONSTRAINT animals_vets PRIMARY KEY (animal_id, vets_id, date_of_visit)
+);
+
+CREATE TABLE specializations (
+    vets_id INT REFERENCES vets(id),
+    species_id INT REFERENCES species(id),
+    CONSTRAINT species_vets PRIMARY KEY (species_id, vets_id)
+);

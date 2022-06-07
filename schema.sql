@@ -58,3 +58,13 @@ CREATE TABLE specializations (
     species_id INT REFERENCES species(id),
     CONSTRAINT species_vets PRIMARY KEY (species_id, vets_id)
 );
+
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+-- Create index on visits table --
+CREATE INDEX ON visits (animal_id);
+
+create index on visits (vet_id)
+where vet_id = 2;
+
+CREATE INDEX email_index ON owners (email);
